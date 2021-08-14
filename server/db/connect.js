@@ -7,6 +7,7 @@ import Proxy from "../models/proxy.model";
 const log = logger(module.filename);
 
 export class DB {
+  //Add singleton instance
   constructor(dbPath) {
     this.db = new Sequelize({
       dialect: "sqlite",
