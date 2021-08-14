@@ -1,0 +1,37 @@
+{
+  "name": "free-proxies",
+  "version": "1.0.0",
+  "description": "service to collect and provide free-proxies",
+  "main": "./app/server.js",
+  "scripts": {
+    "build": "babel server --ignore ./build --out-dir ./build",
+    "prebuild": "rm -rf build/*",
+    "dev": "nodemon --exec babel-node server/index.js",
+    "start": "npm run prebuild && npm run build && NODE_ENV=production node ./build/index.js"
+  },
+  "keywords": [
+    "free-proxy",
+    "proxies"
+  ],
+  "author": "manigandan.p",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "express": "^4.17.1",
+    "sequelize": "^6.6.5",
+    "sqlite3": "^5.0.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.14.9",
+    "nodemon": "^2.0.12"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}
