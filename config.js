@@ -1,10 +1,24 @@
-const config = {};
+const common = {
+  server: {
+    port: 7001,
+  },
+};
 
-config.server = {};
-config.db = {};
+module.exports = {
+  production: {
+    ...common,
+    db: {
+      path: "../../data",
+      fileName: "proxies.db",
+    },
+  },
+  development: {
+    ...common,
+    db: {
+      path: "../../data",
+      fileName: "proxies_dev.db",
+    },
+  },
+};
 
-config.server.port = process.env.PORT || 7001;
-config.db.path = process.env.DB_PATH || "../../data";
-config.db.fileName = process.env.DB_FILENAME || "proxies.db";
-
-module.exports = config;
+// module.exports = config;
