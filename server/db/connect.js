@@ -2,9 +2,11 @@
 
 import logger from "../../logger";
 import { Sequelize } from "sequelize";
-import config from "../../config";
+import c from "../../config";
 import path from "path";
 
+const env = process.env.NODE_ENV || "development";
+const config = c[env];
 const DB_PATH = path.resolve(
   __dirname,
   `${config.db.path}/${config.db.fileName}`
@@ -14,7 +16,6 @@ const log = logger(module.filename);
 
 class DB {
   constructor(dbPath) {
-    console.log("instanation...");
     this.db = new Sequelize({
       dialect: "sqlite",
       storage: dbPath,
