@@ -8,21 +8,19 @@ let url =
 
 let crawler = new Crawler();
 
-console.log(url);
-
-crawler
-  .crawl(url)
-  .then((content) => {
-    let proxiesJson = content.data.data;
-    return proxiesJson.map(function (proxyObj) {
-      return {
-        host: proxyObj.ip,
-        port: proxyObj.port,
-        protocol: proxyObj.protocols[0],
-        country: proxyObj.country,
-      };
-    });
-  })
-  .then((proxies) => bulkCreateProxy(proxies))
-  .then((result) => console.log(result.data))
-  .catch((err) => console.log(err));
+export async function fetchAndStoreProxies() {
+  return await crawler
+    .crawl(url)
+    .then((content) => {
+      let proxiesJson = content.data.data;
+      return proxiesJson.map(function (proxyObj) {
+        return {
+          host: proxyObj.ip,
+          port: proxyObj.port,
+          protocol: proxyObj.protocols[0],
+          country: proxyObj.country,
+        };
+      });
+    })
+    .then((proxies) => bulkCreateProxy(proxies));
+}
