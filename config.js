@@ -113,7 +113,7 @@ module.exports = {
   production: {
     ...common,
     db: {
-      path: "../../data",
+      path: "../../../data",
       fileName: "proxies.db",
     },
   },
