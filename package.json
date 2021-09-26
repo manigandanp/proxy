@@ -4,10 +4,11 @@
   "description": "service to collect and provide free-proxies",
   "main": "./app/server.js",
   "scripts": {
-    "build": "babel server --ignore ./build --out-dir ./build",
+    "build": "babel src --ignore ./build --out-dir ./build",
     "prebuild": "rm -rf build/*",
-    "dev": "nodemon --exec babel-node server/index.js",
-    "start": "npm run prebuild && npm run build && NODE_ENV=production node ./build/index.js"
+    "dev:server": "nodemon --exec babel-node src/server/index.js",
+    "dev:fetcher": "npm run prebuild && npm run build && node ./build/fetcher/crawler.js",
+    "start": "npm run prebuild && npm run build && NODE_ENV=production node ./build/server/index.js"
   },
   "keywords": [
     "free-proxy",
@@ -17,6 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@babel/runtime": "^7.15.4",
+    "axios": "^0.21.4",
     "express": "^4.17.1",
     "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2",
@@ -26,12 +29,18 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
     "@babel/node": "^7.14.9",
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.14.9",
     "nodemon": "^2.0.12"
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/transform-runtime"
+      ]
     ]
   }
 }
