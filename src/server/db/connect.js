@@ -1,8 +1,8 @@
 "use strict";
 
-import logger from "../../logger";
+import logger from "../../../logger";
 import { Sequelize } from "sequelize";
-import c from "../../config";
+import c from "../../../config";
 import path from "path";
 
 const env = process.env.NODE_ENV || "development";

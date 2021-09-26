@@ -5,7 +5,7 @@ export class Proxy extends Model {}
 
 Proxy.init(
   {
-    ip: DataTypes.STRING,
+    host: DataTypes.STRING,
     port: DataTypes.INTEGER,
     country: DataTypes.STRING,
     protocol: DataTypes.STRING,

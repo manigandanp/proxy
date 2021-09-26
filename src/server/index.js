@@ -1,8 +1,8 @@
-import config from "../config";
+import config from "../../config";
 import express from "express";
 import proxyRoutes from "./routes/proxy.routes";
 import { db } from "./db/connect";
-import logger from "../logger";
+import logger from "../../logger";
 
 const log = logger(module.filename);
 const env = process.env.NODE_ENV || "development";

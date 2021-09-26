@@ -15,7 +15,7 @@ module.exports = {
   development: {
     ...common,
     db: {
-      path: "../../data",
+      path: "../../../data",
       fileName: "proxies_dev.db",
     },
   },
