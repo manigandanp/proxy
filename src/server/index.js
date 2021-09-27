@@ -8,7 +8,7 @@ import { fetchAndStoreProxies } from "../fetcher/proxy-parser";
 const log = logger(module.filename);
 const env = process.env.NODE_ENV || "development";
 
-const PORT = config[env].server.port;
+const PORT = process.env.PORT || config[env].server.port;
 const app = express();
 
 app.use("/api/proxies", proxyRoutes);
