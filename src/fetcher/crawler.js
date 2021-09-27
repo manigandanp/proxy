@@ -1,13 +1,7 @@
 import axios from "axios";
 import logger from "../../logger";
 import config from "../../config";
-import { findAllProxies } from "../server/controller/proxy.contoller";
-
-class Helper {
-  getRandomFromArr(items) {
-    return items[Math.floor(Math.random() * items.length)];
-  }
-}
+import { Helper } from "./utils/helper";
 
 export class Crawler {
   constructor() {
