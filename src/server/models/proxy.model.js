@@ -9,6 +9,7 @@ Proxy.init(
     port: DataTypes.INTEGER,
     country: DataTypes.STRING,
     protocol: DataTypes.STRING,
+    hash: DataTypes.STRING,
   },
   { sequelize, modelName: "Proxy" }
 );
