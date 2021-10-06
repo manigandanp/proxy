@@ -4,6 +4,7 @@ import proxyRoutes from "./routes/proxy.routes";
 import { db } from "./db/connect";
 import logger from "../../logger";
 import { fetchAndStoreProxies } from "../fetcher/proxy-parser";
+const path = require("path");
 
 const log = logger(module.filename);
 const env = process.env.NODE_ENV || "development";
@@ -11,7 +12,13 @@ const env = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT || config[env].server.port;
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, "../../app")));
+
 app.use("/api/proxies", proxyRoutes);
+
+app.get("/", (req, res) => {
+  res.sendFile("../../app/index.html", { root: __dirname });
+});
 
 function init() {
   db.sync({ force: true })
