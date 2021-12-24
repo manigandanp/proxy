@@ -2,11 +2,8 @@ import express from "express";
 // import bodyParser from "body-parser";
 import logger from "../../../logger";
 import { fetchAndStoreProxies } from "../../fetcher/proxy-parser";
-import {
-  findAllProxies,
-  createProxy,
-  bulkCreateProxy,
-} from "../controller/proxy.contoller";
+import { findAllProxies } from "../controller/proxy.contoller";
+const path = require("path");
 import { Proxy } from "../models/proxy.model";
 
 const router = express.Router();

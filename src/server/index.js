@@ -1,6 +1,7 @@
 import config from "../../config";
 import express from "express";
-import proxyRoutes from "./routes/proxy.routes";
+import proxyRoutes from "./routes/api.proxy.routes";
+import proxyService from "./routes/service.proxy.routes";
 import { db } from "./db/connect";
 import logger from "../../logger";
 import { fetchAndStoreProxies } from "../fetcher/proxy-parser";
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../../app")));
 
 app.use("/api/proxies", proxyRoutes);
+app.use("/fetch", proxyService);
 
 app.get("/", (req, res) => {
   res.sendFile("../../app/index.html", { root: __dirname });

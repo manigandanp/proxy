@@ -10,6 +10,13 @@ export class Crawler {
     this.__proxies = [];
   }
 
+  crawlWithConfig(url, crawlConfig) {
+    this.__log.info(
+      `Fetching ${url} with proxy config = ${JSON.stringify(crawlConfig)}`
+    );
+    return axios.get(url, crawlConfig);
+  }
+
   __crawlWithProxy(url, proxy) {
     let userAgent = this.__helper.getRandomFromArr(config["userAgents"]);
     let crawlConfig = {
@@ -17,13 +24,8 @@ export class Crawler {
       timeout: 50000,
       headers: { "User-Agent": userAgent },
     };
-    this.__log.info(
-      `Fetching ${url} with proxy config = ${
-        proxy ? proxy["host"] : proxy
-      } and userAgent = ${userAgent} `
-    );
 
-    return axios.get(url, crawlConfig);
+    return this.crawlWithConfig(url, crawlConfig);
   }
   // Crawl using proxy implemention - implementaion is fine but proxies are not working
   // async crawl(url) {
