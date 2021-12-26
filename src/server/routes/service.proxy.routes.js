@@ -10,21 +10,30 @@ router.use(express.json());
 
 const crawler = new Crawler();
 
+function responseHandler(pageUrl, requestResponse, crawlResponse) {
+  return crawlResponse
+    .then((content) =>
+      requestResponse.json({ pageUrl: pageUrl, content: content.data })
+    )
+    .catch((err) =>
+      requestResponse.status(400).send(`{pageUrl: ${pageUrl}, content: ${err}}`)
+    );
+}
+
 router.get("/", async (req, res) => {
   let pageUrl = req.query.url;
   log.info(`Fetching url ${pageUrl}`);
-  crawler
-    .crawl(pageUrl)
-    .then((content) => res.json({ pageUrl: pageUrl, content: content.data }));
+
+  responseHandler(pageUrl, res, crawler.crawl(pageUrl));
+
 });
 
 router.post("/", async (req, res) => {
   let pageUrl = req.body.url;
-  let headers = req.body.headers;
+  let crawlConfig = req.body.crawlConfig;
   log.info(`Fetching url ${pageUrl}`);
-  crawler
-    .crawlWithConfig(pageUrl, headers)
-    .then((content) => res.json({ pageUrl: pageUrl, content: content.data }));
+
+  responseHandler(pageUrl, res, crawler.crawlWithConfig(pageUrl, crawlConfig));
 });
 
 module.exports = router;
